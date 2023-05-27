@@ -9,19 +9,7 @@
 
 # COMMAND ----------
 
-from pyspark.sql import SparkSession
-from pyspark.sql.types import *
-from pyspark.sql.functions import *
-from datetime import *
-import datetime
-from delta.tables import *
-import pandas as pd
-import json
-import requests
-import os
-import functools
-from py4j.protocol import Py4JJavaError
-from pyspark.sql.window import Window
+dbutils.notebook.run('/Users/slsb.brown1@outlook.com/GenericNotebook',60)
 
 # COMMAND ----------
 
