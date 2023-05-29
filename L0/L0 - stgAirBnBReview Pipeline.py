@@ -42,7 +42,7 @@ print(RowsRead)
 
 # COMMAND ----------
 
- tempAirBnBreviewStg01.write.mode("overwrite").format("delta").saveAsTable("tempDTAirBnBreviewStg01")
+tempDTVAirBnBreviewStg01 = tempAirBnBreviewStg01.createOrReplaceTempView("tempDTVAirBnBreviewStg01")
 
 # COMMAND ----------
 
@@ -61,4 +61,4 @@ print(RowsRead)
 # MAGIC REVIEWER_NAME,
 # MAGIC COMMENTS,
 # MAGIC SENTIMENT
-# MAGIC FROM tempDTAirBnBreviewStg01;
+# MAGIC FROM tempDTVAirBnBreviewStg01;
