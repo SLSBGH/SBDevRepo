@@ -28,11 +28,16 @@ spark.conf.set("fs.azure.account.key.2022datasets.blob.core.windows.net",
 
 # COMMAND ----------
 
+from pyspark.sql.functions import lit
+
 RowsRead = 0
+LoadCycle = 'JUNE2023'
 
 tempAirBnBreviewStg01 = spark.read.csv("wasb://csvfiles@2022datasets.blob.core.windows.net/AirBnBReviews.csv", header = "true", inferSchema = "true")
 
-RowsRead = tempAirBnBreviewStg01.count()
+tempAirBnBreviewStg01b = tempAirBnBreviewStg01.withColumn("load_cycle_name", lit(LoadCycle))
+
+RowsRead = tempAirBnBreviewStg01b.count()
 print(RowsRead)
 
 # COMMAND ----------
@@ -42,7 +47,7 @@ print(RowsRead)
 
 # COMMAND ----------
 
-tempDTVAirBnBreviewStg01 = tempAirBnBreviewStg01.createOrReplaceTempView("tempDTVAirBnBreviewStg01")
+tempDTVAirBnBreviewStg01 = tempAirBnBreviewStg01b.createOrReplaceTempView("tempDTVAirBnBreviewStg01")
 
 # COMMAND ----------
 
@@ -52,7 +57,8 @@ tempDTVAirBnBreviewStg01 = tempAirBnBreviewStg01.createOrReplaceTempView("tempDT
 # MAGIC  ReviewDate TIMESTAMP,
 # MAGIC  ReviewerName STRING,
 # MAGIC  ReviewCommentDesc STRING,
-# MAGIC  SentimentTypeName STRING);
+# MAGIC  SentimentTypeName STRING,
+# MAGIC  LoadCycleName STRING);
 # MAGIC
 # MAGIC INSERT INTO stgdb.stgAirBnBReview
 # MAGIC SELECT 
@@ -60,5 +66,10 @@ tempDTVAirBnBreviewStg01 = tempAirBnBreviewStg01.createOrReplaceTempView("tempDT
 # MAGIC DATE,
 # MAGIC REVIEWER_NAME,
 # MAGIC COMMENTS,
-# MAGIC SENTIMENT
+# MAGIC SENTIMENT,
+# MAGIC load_cycle_name
 # MAGIC FROM tempDTVAirBnBreviewStg01;
+
+# COMMAND ----------
+
+
