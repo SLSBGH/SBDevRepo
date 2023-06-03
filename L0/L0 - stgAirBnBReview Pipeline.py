@@ -38,7 +38,7 @@ print(RowsRead)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC Transform dataframe into delta table.
+# MAGIC Transform dataframe into temporary view.
 
 # COMMAND ----------
 
